@@ -91,7 +91,7 @@ export class PerfilMesaComponent implements OnInit {
   }
 
   private navigateList() {
-    this.router.navigate(['mesas/perfiles/crear']);
+    this.router.navigate(['mesas/perfiles']);
     // window.location.reload();
     // this.router.navigateByUrl('/mesas/perfiles', {skipLocationChange: true}).then(()=>
     // this.router.navigate(["/mesas/perfiles"])); 

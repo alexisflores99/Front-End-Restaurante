@@ -7,6 +7,7 @@ import { Mensaje } from 'src/app/infrastructure/constans/Mensaje';
 import { Cliente } from 'src/app/domain/Cliente';
 import { UsuarioService } from 'src/app/services/administracion/administracion-usuarios/usuarios.service';
 import { Path } from 'src/app/infrastructure/constans/Path';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-crear-usuario',
@@ -57,6 +58,11 @@ export class CrearUsuarioComponent implements OnInit {
       this.load = true;
       this.passDiferente = this.passwordDiferente();
       if (!this.passDiferente) {
+        Swal.fire({
+          icon: 'success',
+          title: 'Usuario creado correctamente',
+          
+        })
         if (!this.esCliente) {
           this.crearUsuario();
         } else {
@@ -67,6 +73,9 @@ export class CrearUsuarioComponent implements OnInit {
       }
 
     }
+    
+    
+    
   }
 
   private passwordDiferente() {

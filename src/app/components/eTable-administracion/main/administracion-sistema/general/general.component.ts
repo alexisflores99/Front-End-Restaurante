@@ -4,6 +4,8 @@ import { Configuracion } from 'src/app/domain/Configuracion';
 import { Path } from 'src/app/infrastructure/constans/Path';
 import { Mensaje } from 'src/app/infrastructure/constans/Mensaje';
 import { ImageSelected } from 'src/app/infrastructure/plugins/ImageSelected';
+import Swal from 'sweetalert2';
+
 @Component({
   selector: 'app-general',
   templateUrl: './general.component.html',
@@ -68,7 +70,11 @@ export class GeneralComponent implements OnInit {
     this.edit = !this.edit;
     this.btn = 'Guardar';
     this.success = false;
+
+    
   }
+
+  
 
 
   habilitar(id: number) {
@@ -197,6 +203,21 @@ export class GeneralComponent implements OnInit {
     this.edit = !this.edit;
     this.empty = false;
     this.image = null;
+
+    Swal.fire({
+      title: '¿Estás seguro que deseas cancelar?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'No, Seguir editando',
+      cancelButtonText: 'Sí, cancelar'
+    }).then((result) => {
+      if (result.value) {
+        this.editar();
+      }
+    })
+
   }
 
   public onUploadFinish(event) {

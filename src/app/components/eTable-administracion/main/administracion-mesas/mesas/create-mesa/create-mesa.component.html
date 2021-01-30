@@ -24,7 +24,7 @@
     <hr class="mt-1" />
     <div class="row mt-2 mb-3">
         <div class="col-lg-4 col-md-6 col-sm-6">
-            <select class="form-control form-control-sm" [(ngModel)]="selectedTypeIdPerfil">
+            <select required class="form-control form-control-sm" [(ngModel)]="selectedTypeIdPerfil">
                 <option [ngValue]="0">Seleccionar perfil de mesa</option>
                 <option [ngValue]="perfil.cperfilmesa" *ngFor="let perfil of perfilmesa">{{perfil.pmnombre}}
                 </option>
@@ -36,7 +36,7 @@
     <hr class="mt-1" />
     <div class="row mt-2 mb-3">
         <div class="col-lg-4 col-md-6 col-sm-6">
-            <select class="form-control form-control-sm" [(ngModel)]="selectedTypeIdEstado">
+            <select required class="form-control form-control-sm" [(ngModel)]="selectedTypeIdEstado">
                 <option [ngValue]="0">Seleccionar un estado de mesa</option>
                 <option [ngValue]="estado.cestadomesa" *ngFor="let estado of estadomesa">{{estado.emdescripcion}}
                 </option>

@@ -24,8 +24,9 @@ export class EditarUsuarioComponent implements OnInit {
   public passDiferente: boolean;
   public selectedTypeId: number;
   public esCliente: boolean;
-  public passw: string;
+  public passw: string = 'A';
   public changePassword: boolean;
+
   public success: boolean;
   public successText: string;
 
@@ -78,24 +79,35 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   public guardar() {
-    this.success = this.isEmpty();
-    if (!this.success) {
-      this.load = true;
-      this.user.ctipousuario = this.selectedTypeId;
-      this.serviceUsuario.editUserById(this.user).subscribe(data => {
-        if (data != null) {
-          if (this.esCliente) {
-            this.guardarCliente();
+    if(this.passDiferente = this.passwordDiferente()){
+        return; 
+    }else{
+      this.success = this.isEmpty();
+      if (!this.success) {
+        this.load = true;
+        this.user.ctipousuario = this.selectedTypeId;
+        this.serviceUsuario.editUserById(this.user).subscribe(data => {
+          if (data != null) {
+            if (this.esCliente) {
+              this.guardarCliente();
+            } else {
+              this.navigateList();
+            }
           } else {
-            this.navigateList();
+            this.load = false;
+            this.success = true;
+            this.successText = 'Nombre de usuario ya existe';
           }
-        } else {
-          this.load = false;
-          this.success = true;
-          this.successText = 'Nombre de usuario ya existe';
-        }
-      });
+        });
     }
+    }
+  }
+
+  private passwordDiferente() {
+    if (this.user.password === this.passw) {
+      return false;
+    }
+    return true;
   }
 
   private guardarCliente() {
@@ -135,10 +147,13 @@ export class EditarUsuarioComponent implements OnInit {
                    this.successText = 'No se puede eliminar este usuario';
                  }
                }, error => {
+                 
                  if (error) {
+
                    this.load = false;
                    this.success = true;
                    this.successText = 'Sucedió un error con el servidor';
+                   
                  }
                });
        }
@@ -190,7 +205,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   private navigateList() {
-    this.router.navigate(['usuarios/list']);
+    this.router.navigate(['/usuarios/list']);
   }
 
   private getTiposUsuario() {
